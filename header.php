@@ -33,7 +33,7 @@
         <img class="initial-subscription__image" src="<?php echo bloginfo('template_url');?>/assets/img/subscription-img.jpg" alt="img">
         <div class="initial-subscription__text">
           <strong class="initial-subscription__title">Subscribe Now</strong>
-          <span class="initial-subscription__price">3 month for $19</span>
+          <span class="initial-subscription__price"><?php the_field("subscription_payment", 11); ?></span>
         </div>
       </a>
       <a href="#" class="person-room header-top__person-room">
@@ -46,15 +46,21 @@
     <div class="header-middle">
       <div class="header-middle__logo-block">
         <img src="<?php echo bloginfo('template_url');?>/assets/img/header-logo.jpg" alt="Logo" class="header-middle__image logo-image">
-        <span class="header-middle__text">Boston and New York Bear Brunt</span>
+        <span class="header-middle__text"><?php the_field("header_middle_text", 11); ?></span>
       </div>
       <!-- /.header-middle__logo-block -->
       <a href="index.html" class="logo header-middle__logo">
-        <img src="<?php echo bloginfo('template_url');?>/assets/img/icons/logo.svg" alt="Universal" class="fit-img">
+        <img src="
+        <?php
+        $logo = wp_get_attachment_image_src(get_theme_mod('custom_logo'), full);
+
+        echo $logo[0];
+        ?>
+        " alt="Universal" class="fit-img">
       </a>
       <!-- /.logo -->
       <div class="header-middle__information-block">
-        <span class="date">Monday, January 1, 2018</span>
+        <span class="date"><?php echo current_time( 'l, F jS, Y', 1 ); ?></span>
         <div class="temperature header-middle__temperature">
           <img src="<?php echo bloginfo('template_url');?>/assets/img/icons/sun.svg" alt="Sun-icon" class="fit-img temperature__icon">
           <span class="temperature__num">- 23 °C</span>
@@ -69,17 +75,15 @@
   <div class="header-bottom">
     <div class="container">
       <nav class="header__nav">
-        <a href="#" class="btnhover header__link">News</a>
-        <a href="#" class="btnhover header__link">Opinion</a>
-        <a href="#" class="btnhover header__link">Science</a>
-        <a href="#" class="btnhover header__link">Life</a>
-        <a href="#" class="btnhover header__link">Travel</a>
-        <a href="#" class="btnhover header__link">Moneys</a>
-        <a href="#" class="btnhover header__link">Art & Design</a>
-        <a href="#" class="btnhover header__link">Sports</a>
-        <a href="#" class="btnhover header__link">People</a>
-        <a href="#" class="btnhover header__link">Health</a>
-        <a href="#" class="btnhover header__link">Education</a>
+      <?php wp_nav_menu( [
+              'menu'            => 'Main', 
+              'container'       => false, 
+              'menu_class'      => 'header__nav-menu', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="header__nav-menu">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
       </nav>
       <!-- /.nav -->
     </div>
@@ -103,64 +107,97 @@
         <div class="menu header__menu">
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">News</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Nation</a></li>
-              <li class="menu__item header__item"><a href="#">World</a></li>
-              <li class="menu__item header__item"><a href="#">Politics</a></li>
-              <li class="menu__item header__item"><a href="#">Solar Eclipse</a></li>
-            </ul>
+
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'News', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">Arts</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Art & Design</a></li>
-              <li class="menu__item header__item"><a href="#">Movies</a></li>
-              <li class="menu__item header__item"><a href="#">People</a></li>
-              <li class="menu__item header__item"><a href="#">Video: Arts</a></li>
-              <li class="menu__item header__item"><a href="#">Theater</a></li>
-            </ul>
+            
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'Arts', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">Travel</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Destinations</a></li>
-              <li class="menu__item header__item"><a href="#">Flights</a></li>
-              <li class="menu__item header__item"><a href="#">Business Travel</a></li>
-            </ul>
+            
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'Travel', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">Sports</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Olympics</a></li>
-              <li class="menu__item header__item"><a href="#">Motor Sports</a></li>
-              <li class="menu__item header__item"><a href="#">Volleyball</a></li>
-              <li class="menu__item header__item"><a href="#">MMA</a></li>
-              <li class="menu__item header__item"><a href="#">Cycling</a></li>
-            </ul>
+            
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'Sports', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">Tech</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Tech</a></li>
-              <li class="menu__item header__item"><a href="#">Tech Columnists</a></li>
-              <li class="menu__item header__item"><a href="#">Tech Reviews</a></li>
-              <li class="menu__item header__item"><a href="#">Talking Tech</a></li>
-            </ul>
+            
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'Tech', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
           <div class="menu__list header__list">
             <h3 class="menu__title header__title">Moneys</h3>
-            <ul class="menu__ul">
-              <li class="menu__item header__item"><a href="#">Markets</a></li>
-              <li class="menu__item header__item"><a href="#">Business</a></li>
-              <li class="menu__item header__item"><a href="#">Personal Finance</a></li>
-              <li class="menu__item header__item"><a href="#">Retirement</a></li>
-              <li class="menu__item header__item"><a href="#">Careers</a></li>
-            </ul>
+            <?php wp_nav_menu( [
+              'theme_location'  => 'header',
+              'menu'            => 'Moneys', 
+              'container'       => false, 
+              'menu_class'      => 'menu__ul', 
+              'echo'            => true,
+              'fallback_cb'     => 'wp_page_menu',
+              'items_wrap'      => '<ul class="menu__ul">%3$s</ul>',
+              'depth'           => 1,
+            ] ); ?>
+
           </div>
           <!-- /.menu__list header__list -->
         </div>

@@ -2,7 +2,7 @@
   get_header();
 ?>
 
-<body>
+<body class="index-body">
   <div class="wrapper">
     <main>
       <div class="todays-news">
@@ -214,42 +214,58 @@
         <section class="three-day-news">
           <div class="first-news three-day-news__first-news">
             <div class="first-news__info">
-              <span class="subject first-news__subject">cars</span>
+              <span class="subject first-news__subject"><?php the_field('three-day-news_first-news_subject'); ?></span>
               <h3 class="title btnhover first-news__title">
-                <a href="#">The joy of replicas: A $ 5 million car for $ 50,000</a>
+                <a href="#"><?php the_field('three-day-news_first-news_heading'); ?></a>
               </h3>
-              <p class="text first-news__text">The 31-year-old self-taught engineer and former amateur racer spends
-                his days building artful recreations of one of most iconic sports cars</p>
+              <p class="text first-news__text"><?php the_field('three-day-news_first-news_subtitle'); ?></p>
             </div>
-            <div class="first-news__image"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/first-news-img.jpg"
-                alt="first-news-image">
+            <div class="first-news__image">
+              <?php 
+                $first_news_image = get_field('three-day-news_first-news_img');
+
+                if (!empty($first_news_image)):
+                  ?>
+                  <img class="fit-img" src="<?php echo $first_news_image['url'];?>"
+                alt="<?php echo $first_news_image['alt'];?>">
+                <?php endif; ?>
             </div>
             <hr>
             <a href="#">
               <div class="first-news-comment">
-                <div class="avatar first-news-comment__avatar"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/user-2.jpg"
-                    alt="Author:Jessica"></div>
-                <h4 class="first-news-comment__name">Jessica Miller:</h4>
-                <p class="first-news-comment__text">Even as the ride-hailing service’s future rememember</p>
+                <div class="avatar first-news-comment__avatar"><?php 
+                $first_news_image_avatar = get_field('three-day-news_first-news_author_avatar');
+
+                if (!empty($first_news_image_avatar)):
+                  ?>
+                  <img class="fit-img" src="<?php echo $first_news_image_avatar['url'];?>"
+                alt="<?php echo $first_news_image_avatar['alt'];?>">
+                <?php endif; ?></div>
+                <h4 class="first-news-comment__name"><?php the_field('three-day-news_first-news_author_name'); ?>:</h4>
+                <p class="first-news-comment__text"><?php the_field('three-day-news_first-news_author_comment'); ?></p>
                 <span class="comments-number first-news-comment__number"><img 
                     src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comment">342</span>
               </div>
             </a>
           </div>
           <!-- /.first-news -->
-          <div class="secondary-news three-day-news__secondary-news">
+          <div class="secondary-news three-day-news__secondary-news" style="  background-image: url(<?php the_field('three-day-news_secondary-news_img'); ?>);">
             <div class="secondary-news__popular-tag">Popular</div>
             <div class="secondary-news__info">
-              <span class="subject secondary-news__subject">art & design</span>
-              <h3 class="title btnhover secondary-news__title"><a href="#">Invisible ink: the weird world of tattoo
-                  removal –
-                  in pictures</a></h3>
+              <span class="subject secondary-news__subject"><?php the_field('three-day-news_secondary-news_subject'); ?></span>
+              <h3 class="title btnhover secondary-news__title"><a href="#"><?php the_field('three-day-news_secondary-news_heading'); ?></a></h3>
               <a href="#">
                 <div class="secondary-news-comment">
-                  <div class="avatar secondary-news__avatar"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/user-2.jpg"
-                      alt="Author:Sarah"></div>
+                  <div class="avatar secondary-news__avatar"><?php 
+                $secondary_news_image_avatar = get_field('three-day-news_secondary-news_author_avatar');
+
+                if (!empty($secondary_news_image_avatar)):
+                  ?>
+                  <img class="fit-img" src="<?php echo $secondary_news_image_avatar['url'];?>"
+                alt="<?php echo $secondary_news_image_avatar['alt'];?>">
+                <?php endif; ?></div>
                   <div>
-                    <h4 class="secondary-news-comment__name">By Sarah Jenkins</h4>
+                    <h4 class="secondary-news-comment__name"><?php the_field('three-day-news_secondary-news_author_name'); ?></h4>
                     <div class="secondary-news-comment__info">
                       <time datetime="2018-09-26 19:00" class="publication-date secondary-news-comment__date">Sept
                         26</time>
@@ -266,89 +282,88 @@
           <!-- /.secondary-news -->
           <a class="three-day-news__third-news" href="#">
             <figure class="third-news">
-              <img  class="fit-img third-news__image" src="<?php echo bloginfo('template_url');?>/assets/img/third-news-img.jpg" alt="third-news-image">
-              <figcaption class="title btnhover third-news__title">200+ Doomed Cats Saved From Euthanization
+            <?php 
+                $three_day_news_image_avatar = get_field('three-day-news_third-news_img');
+
+                if (!empty($three_day_news_image_avatar)):
+                  ?>
+                  <img class="fit-img third-news__image" src="<?php echo $three_day_news_image_avatar['url'];?>"
+                alt="<?php echo $three_day_news_image_avatar['alt'];?>">
+                <?php endif; ?>
+              <figcaption class="title btnhover third-news__title"><?php the_field('three-day-news_third-news_heading'); ?>
               </figcaption>
             </figure>
           </a>
           <!-- /.third-news -->
-          <a class="common-news three-day-news__common-news-1" href="#">
-            <div>
-              <h3 class="title common-news__title">Is Coffee Bad for Bones?</h3>
-              <p class="text common-news__text">Coffee drinkers may excrete more calcium, but it doesn’t appear to
-                weaken bones</p>
-              <time datetime="2018-10-15 19:00" class="publication-date">Oct 15</time>
-            </div>
-          </a>
-          <!-- /.common-news -->
-          <a class="common-news three-day-news__common-news-2" href="#">
-            <div>
-              <h3 class="title common-news__title">What We Manufacture</h3>
-              <p class="text common-news__text">A global history of the factory and the modern world that all should
-                read</p>
-              <time datetime="2018-10-14 19:00" class="publication-date">Oct 14</time>
-            </div>
-          </a>
-          <!-- /.common-news -->
-          <a class="common-news three-day-news__common-news-3" href="#">
-            <div>
-              <h3 class="title common-news__title">It’s a Stressful World</h3>
-              <p class="text common-news__text">Can a cruise skeptic enjoy four days on the seas with his family and a
-                bunch of princesses?</p>
-              <time datetime="2018-10-14 19:00" class="publication-date">Oct 14</time>
-            </div>
-          </a>
-          <!-- /.common-news -->
-          <a class="common-news three-day-news__common-news-4" href="#">
-            <div>
-              <h3 class="title common-news__title">A Treat for Lemon Lovers</h3>
-              <p class="text common-news__text">This tangerine, ginger and chocolate tart has verve, depth and a hint of
-                spice</p>
-              <time datetime="2018-10-13 19:00" class="publication-date">Oct 13</time>
-            </div>
-          </a>
+          <?php 
+          $i = 1;
+            $posts = get_posts( array(
+              'numberposts' => 4,
+              'category_name'    => 'common_news',
+              'orderby'     => 'rand',
+              'order'       => 'ASC',
+              'post_type'   => 'post',
+              'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            foreach( $posts as $post ){
+              setup_postdata($post);
+                ?>
+                  <a class="common-news three-day-news__common-news-<?php echo $i; ?>" href="#">
+                    <div>
+                      <h3 class="title common-news__title"><?php the_title(); ?></h3>
+                      <p class="text common-news__text"><?php the_field('common_news_text'); ?></p>
+                      <time datetime="2018-10-15 19:00" class="publication-date">Oct 1<?php echo $i; $i++; ?></time>
+                    </div>
+                  </a>
+                <?php
+            }
+
+            wp_reset_postdata(); // сброс
+          ?>
+         
           <!-- /.common-news -->
           <div class="news-column three-day-news__column">
             <h3 class="caption news-column__heading">columns</h3>
             <ul class="news-column__list">
-              <li class="news-column__item">
-                <h3 class="title btnhover news-column__title"><a href="#">Architecture is the thoughtful making of
-                    space</a></h3>
+            <?php 
+          $i = 1;
+            $posts = get_posts( array(
+              'numberposts' => 3,
+              'category_name'    => 'column_news',
+              'orderby'     => 'rand',
+              'order'       => 'ASC',
+              'post_type'   => 'post',
+              'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            foreach( $posts as $post ){
+              setup_postdata($post);
+                ?>
+                  <li class="news-column__item">
+                <h3 class="title btnhover news-column__title"><a href="#"><?php the_title(); ?></a></h3>
                 <div class="author">
-                  <div class="avatar author__avatar"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/user-3.jpg"
-                      alt="David"></div>
+                  <div class="avatar author__avatar"> <?php 
+                $news_column_author_avatar = get_field('column_news_author_avatar');
+
+                if (!empty($news_column_author_avatar)):
+                  ?>
+                  <img class="fit-img" src="<?php echo $news_column_author_avatar['url'];?>"
+                alt="<?php echo $news_column_author_avatar['alt'];?>">
+                <?php endif; ?>
+                  </div>
                   <div>
-                    <h4 class="author__name">David Williams</h4>
-                    <span class="author__subtitle">Architect</span>
+                    <h4 class="author__name"><?php the_field('column_news_author_name'); ?></h4>
+                    <span class="author__subtitle"><?php the_field('column_news_author_job'); ?></span>
                   </div>
                 </div>
               </li>
-              <li class="news-column__item">
-                <h3 class="title btnhover news-column__title"><a href="#">The details are not the details. They make the
-                    design.</a>
-                </h3>
-                <div class="author">
-                  <div class="avatar author__avatar"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/user-4.jpg"
-                      alt="Alexandra"></div>
-                  <div>
-                    <h4 class="author__name">Alexandra Green</h4>
-                    <span class="author__subtitle">Interior designer</span>
-                  </div>
-                </div>
-              </li>
-              <li class="news-column__item">
-                <h3 class="title btnhover news-column__title"><a href="#">Live life to the fullest, and focus on the
-                    positive</a>
-                </h3>
-                <div class="author">
-                  <div class="avatar author__avatar"><img  class="fit-img" src="<?php echo bloginfo('template_url');?>/assets/img/user-5.jpg" alt="img">
-                  </div>
-                  <div>
-                    <h4 class="author__name">Olivia Thompson</h4>
-                    <span class="author__subtitle">Coacher</span>
-                  </div>
-                </div>
-              </li>
+                <?php
+            }
+
+            wp_reset_postdata(); // сброс
+          ?>
+            
             </ul>
             <a href="#" class="more news-column__more">Read more</a>
           </div>
@@ -374,23 +389,40 @@
       <div class="container">
         <div class="weekly-news">
           <div class="weekly-news__body">
-            <article class="weekly-news-article weekly-news-article-1 weekly-news__article">
-              <span data-target="l-1"
-                class="label btnhover weekly-news-article__label weekly-news-article__label-1"><img 
-                  id="l-1" class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-1.jpg" alt="img">
+          <?php
+          $i = 1;
+          // параметры по умолчанию
+          $posts = get_posts( array(
+            'numberposts' => -1,
+            'category_name'    => 'weekly_news',
+            'orderby'     => 'rand',
+            'order'       => 'ASC',
+            'post_type'   => 'post',
+            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+          ) );
+
+          foreach( $posts as $post ){
+            setup_postdata($post);
+              ?>
+               <article class="weekly-news-article weekly-news-article-<?php echo $i; ?> weekly-news__article">
+              <span data-target="l-<?php echo $i; ?>"
+                class="label btnhover weekly-news-article__label weekly-news-article__label-<?php echo $i; ?>"><img 
+                  id="l-<?php echo $i; ?>" class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
+              <div class="weekly-news-article__image">
+              <?php
+              $weekly_news_article_image = get_field('weekly_news_img');
+              if (!empty($weekly_news_article_image)):
+              ?>
+               <img class="fit-img"
+                  src="<?php echo $weekly_news_article_image['url']; ?>" alt="<?php echo $weekly_news_article_image['alt']; ?>">
+              <?php endif; ?>
               </div>
               <div>
-                <span class="subject subject_blue weekly-news-article__subject">flights</span>
-                <h3 class="title weekly-news-article__title"><a href="#">Passengers Suffer as Crowded Field
-                    Puts
-                    Pressure on
-                    Europe’s Airlines</a></h3>
-                <p class="text weekly-news-article__text">Weaker carriers have fallen by the wayside amid fierce
-                  competition, while others have been hit by bad luck. The result: thousands of canceled flights.</p>
+                <span class="subject subject_blue weekly-news-article__subject"><?php the_field('weekly_news_subject'); ?></span>
+                <h3 class="title weekly-news-article__title"><a href="#"><?php the_title(); ?></a></h3>
+                <p class="text weekly-news-article__text"><?php the_field('weekly_news_desription'); ?></p>
                 <footer class="weekly-news-article__footer">
-                  <time datetime="2018-08-06 20:00" class="publication-date">Aug 6</time>
+                  <time datetime="2018-08-06 20:00" class="publication-date">Aug <?php echo $i; $i++; ?></time>
                   <button class="comments-number weekly-news-article__comments"><img 
                       src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">342</button><button
                     class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
@@ -399,192 +431,51 @@
               </div>
             </article>
             <!-- /.weekly-news-article -->
-            <hr>
-            <article class="weekly-news-article weekly-news-article-2 weekly-news__article">
-              <span data-target="l-2" class="label btnhover weekly-news-article__label"><img  id="l-2"
-                  class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-2.jpg" alt="img">
-              </div>
-              <div>
-                <span class="subject subject_light-blue weekly-news-article__subject">food</span>
-                <h3 class="title weekly-news-article__title"><a href="#">Three Courses, 20 Euros: The
-                    Affordable Dining
-                    Renaissance in Paris</a></h3>
-                <p class="text weekly-news-article__text">The Los Angeles area, for all of its culinary diversity, has
-                  not historically been thought of as a haven for bread lovers. The area has a reputation as a place
-                  where gluten fears to tread.</p>
-                <footer class="weekly-news-article__footer">
-                  <time datetime="2018-10-07 12:00" class="publication-date">Oct 7</time>
-                  <button class="comments-number weekly-news-article__comments"><img 
-                      src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">27</button><button
-                    class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
-                      alt="likes" class="like-icon">129</button>
-                </footer>
-              </div>
-            </article>
-            <!-- /.weekly-news-article -->
-            <hr>
-            <article class="weekly-news-article weekly-news-article-3 weekly-news__article">
-              <span data-target="l-3" class="label btnhover weekly-news-article__label"><img  id="l-3"
-                  class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-3.jpg" alt="img">
-              </div>
-              <div>
-                <span class="subject subject_red weekly-news-article__subject">science</span>
-                <h3 class="title weekly-news-article__title"><a href="#">Watch the High-Flying Physics of a
-                    Plant’s
-                    Exploding
-                    Fruits</a></h3>
-                <p class="text weekly-news-article__text">Three undergradute physics majors and their professor worked
-                  out how the hairyflower wild petunia shoots tiny seeds more than 20 feet through the air</p>
-                <footer class="weekly-news-article__footer">
-                  <time datetime="2018-10-11 12:00" class="publication-date">Oct 11</time>
-                  <button class="comments-number weekly-news-article__comments"><img 
-                      src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">30</button><button
-                    class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
-                      alt="likes" class="like-icon">284</button>
-                </footer>
-              </div>
-            </article>
-            <!-- /.weekly-news-article -->
-            <hr>
-            <article class="weekly-news-article weekly-news-article-4 weekly-news__article">
-              <span data-target="l-4" class="label btnhover weekly-news-article__label"><img  id="l-4"
-                  class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-4.jpg" alt="img">
-              </div>
-              <div>
-                <span class="subject subject_light-blue weekly-news-article__subject">health</span>
-                <h3 class="title weekly-news-article__title"><a href="#">How the Shape of Your Ears Affects
-                    What You Hear</a></h3>
-                <p class="text weekly-news-article__text">We’re able to locate sound because our brains grasp the
-                  shape of our ears. When that shape changes, we need time and practice to adapt. Ears are a
-                  peculiarly individual piece of anatomy.</p>
-                <footer class="weekly-news-article__footer">
-                  <time datetime="2018-10-19 15:00" class="publication-date">Oct 19</time>
-                  <button class="comments-number weekly-news-article__comments"><img 
-                      src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">102</button><button
-                    class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
-                      alt="likes" class="like-icon">1,293</button>
-                </footer>
-              </div>
-            </article>
-            <!-- /.weekly-news-article -->
-            <hr>
-            <article class="weekly-news-article weekly-news-article-5 weekly-news__article">
-              <span data-target="l-5" class="label btnhover weekly-news-article__label"><img  id="l-5"
-                  class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-5.jpg" alt="img">
-              </div>
-              <div>
-                <span class="subject subject_red weekly-news-article__subject">science</span>
-                <h3 class="title weekly-news-article__title"><a href="#">Forests Protect the Climate. A Future
-                    With More
-                    Storms
-                    Would Mean Trouble.</a></h3>
-                <p class="text weekly-news-article__text">With an increase in extreme weather expected in the years to
-                  come, forests could be changed permanently as the world continues to warm</p>
-                <footer class="weekly-news-article__footer">
-                  <time datetime="2018-10-22 11:00" class="publication-date">Oct 22</time>
-                  <button class="comments-number weekly-news-article__comments"><img 
-                      src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">5</button><button
-                    class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
-                      alt="likes" class="like-icon">82</button>
-                </footer>
-              </div>
-            </article>
-            <!-- /.weekly-news-article -->
-            <hr>
-            <article class="weekly-news-article weekly-news-article-6 weekly-news__article">
-              <span data-target="l-6" class="label btnhover weekly-news-article__label"><img  id="l-6"
-                  class="fit-img label__icon" src="<?php echo bloginfo('template_url');?>/assets/img/icons/bookmark.svg" alt="label"></span>
-              <div class="weekly-news-article__image"><img  class="fit-img"
-                  src="<?php echo bloginfo('template_url');?>/assets/img/weekly-article-img-6.jpg" alt="img">
-              </div>
-              <div>
-                <span class="subject subject_violet weekly-news-article__subject">art & design</span>
-                <h3 class="title weekly-news-article__title"><a href="#">New Contemporary Institute
-                    Reverberates in
-                    Richmond’s
-                    Historic Landscape</a></h3>
-                <p class="text weekly-news-article__text">The center, which will open in April, takes a bold look at
-                  race and other social issues that still resonate in the region as well as the nation. A new
-                  Institute for Contemporary Art is set to open.</p>
-                <footer class="weekly-news-article__footer">
-                  <time datetime="2018-10-26 19:00" class="publication-date">Oct 26</time>
-                  <button class="comments-number weekly-news-article__comments"><img 
-                      src="<?php echo bloginfo('template_url');?>/assets/img/icons/comment-icon.svg" alt="comments" class="comment-icon">101</button><button
-                    class="likes-number weekly-news-article__likes"><img  src="<?php echo bloginfo('template_url');?>/assets/img/icons/like-icon.svg"
-                      alt="likes" class="like-icon">432</button>
-                </footer>
-              </div>
-            </article>
-            <!-- /.weekly-news-article -->
+              <?php
+          }
+
+          wp_reset_postdata(); // сброс
+          ?>
           </div>
           <!-- /.weekly-news__body -->
           <aside class="weekly-news__aside weekly-news-aside">
             <h3 class="caption weekly-news-aside__heading">Recommended for you</h3>
             <ul class="weekly-news-aside__list">
-              <li class="weekly-news-aside__item weekly-news-aside__item-1">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-1.jpg" alt="img"></div>
+              <?php
+              $i = 1;
+              // параметры по умолчанию
+              $posts = get_posts( array(
+                'numberposts' => -1,
+                'category_name'    => 'recommended_column_news',
+                'orderby'     => 'date',
+                'order'       => 'DESC',
+                'post_type'   => 'post',
+                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+              ) );
+
+              foreach( $posts as $post ){
+                setup_postdata($post);
+                  ?>
+              <li class="weekly-news-aside__item weekly-news-aside__item-<?php echo $i; $i++; ?>">
+                <div class="weekly-news-aside__image">
+                <?php
+              $weekly_news_aside_image = get_field('recommended_column_news_img');
+              if (!empty($weekly_news_aside_image)):
+              ?>
+                <img class="fit-img"
+                  src="<?php echo $weekly_news_aside_image['url']; ?>" alt="<?php echo $weekly_news_aside_image['alt']; ?>">
+              <?php endif; ?>
+                </div>
                 <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Office Meetings Leave the Office</a></p>
-                  <span class="publication-date">15 minuts ago</span>
+                  <p class="text weekly-news-aside__text"><a href="#"><?php the_title(); ?></a></p>
+                  <span class="publication-date"><?php echo get_post_time('Y/m/d \a\t g:ia', true, null, false); ?></span>
                 </div>
               </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-2">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-2.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Experimental Vocal Music in Brooklyn</a></p>
-                  <span class="publication-date">32 minuts ago</span>
-                </div>
-              </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-3">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-3.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Google’s Influence Over Think Tanks</a></p>
-                  <span class="publication-date">38 minuts ago</span>
-                </div>
-              </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-4">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-4.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Homes for Sale in NYC and Connecticut</a></p>
-                  <span class="publication-date">53 minuts ago</span>
-                </div>
-              </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-5">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-5.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Are You There, Dad? It’s Me, Alice</a></p>
-                  <span class="publication-date">1 hour ago</span>
-                </div>
-              </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-6">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-6.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">The New Punk Look: Lacy and Colorful</a></p>
-                  <span class="publication-date">1 hour ago</span>
-                </div>
-              </li>
-              <li class="weekly-news-aside__item weekly-news-aside__item-7">
-                <div class="weekly-news-aside__image"><img  class="fit-img"
-                    src="<?php echo bloginfo('template_url');?>/assets/img/weekly-news-aside-image-7.jpg" alt="img"></div>
-                <div>
-                  <p class="text weekly-news-aside__text"><a href="#">Sunday Best in Harlem and Brooklyn</a></p>
-                  <span class="publication-date">2 hours ago</span>
-                </div>
-              </li>
+                  <?php
+              }
+
+              wp_reset_postdata(); // сброс
+              ?>
             </ul>
             <a href="#" class="more weekly-news-aside__more">Read more</a>
           </aside>

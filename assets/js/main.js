@@ -7,7 +7,7 @@ $(document).ready(function () {
   }), $(".tabs-item").on("click", function () {
     $(".tabs-item").removeClass("tab-active"), $(".tabs-block").removeClass("tab-active"), $(this).addClass("tab-active"), $("#" + $(this).attr("data-target")).addClass("tab-active")
   }), $(".label").on("click", function () {
-    "img/icons/bookmark-active.svg" == $("#" + $(this).attr("data-target")).attr("src") ? $("#" + $(this).attr("data-target")).attr("src", "img/icons/bookmark.svg") : $("#" + $(this).attr("data-target")).attr("src", "img/icons/bookmark-active.svg")
+    "wp-content/themes/universal/assets/img/icons/bookmark-active.svg" == $("#" + $(this).attr("data-target")).attr("src") ? $("#" + $(this).attr("data-target")).attr("src", "wp-content/themes/universal/assets/img/icons/bookmark.svg") : $("#" + $(this).attr("data-target")).attr("src", "wp-content/themes/universal/assets/img/icons/bookmark-active.svg")
   }), $("#load-more").click(function () {
     $(this).toggleClass("load-active"), setTimeout(function () {
       $(".comment-hidden").addClass("comment-visible")
